@@ -1,6 +1,6 @@
 {
   "name": "elses-pdf",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Multi-page print layouts for React with automatic page breaks. Write any layout as plain React, let long content split across pages like an auto table.",
   "author": "Groot",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "README.md",
     "LICENSE",
     "tsconfig.json",
-    "tsup.config.ts"
+    "tsup.config.ts",
+    "changelog.md"
   ],
   "keywords": [
     "react",

@@ -105,6 +105,15 @@ For an in-app preview, render `<Page>` directly. Call `printDocument` when the u
 - Keep the footer height consistent between pages. Give images explicit dimensions so their space is reserved while the document is measured.
 - `PageElement` must be a direct child of `Page`.
 
+## What's New — v1.2.0
+
+- Added a built-in print toolbar with a manual **Print** button.
+- Automatically hides the toolbar when printing.
+- Improved the timing of automatic printing when using `onReady`.
+- Preserved the existing browser print workflow, including **Save as PDF**.
+
+See [CHANGELOG.md](./changelog.md) for the full release history.
+
 ## Source and experimentation
 
 This is an experimental project, and its source is included in the npm package. The published package includes `src/`, tests, and TypeScript/build configuration so curious users can inspect, modify, and try the implementation themselves.

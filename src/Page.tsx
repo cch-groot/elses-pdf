@@ -99,7 +99,8 @@ export function Page(props: PageProps): ReactElement {
       const column = columnRef.current;
       if (cancelled || !column) return;
 
-      const h = (el: HTMLElement | null) => el?.getBoundingClientRect().height ?? 0;
+      const h = (el: HTMLElement | null) =>
+        el?.getBoundingClientRect().height ?? 0;
       const columnTop = column.getBoundingClientRect().top;
 
       // Measure the usable area without the notice, while keeping footer variants conservative.
@@ -108,7 +109,9 @@ export function Page(props: PageProps): ReactElement {
         ...bodyRefs.current.map((el, i) => {
           const measuredHeight = el ? h(el) : Infinity;
           // The first and middle-page samples include the notice; restore that space here.
-          return i < 2 ? measuredHeight + continuationNoticeHeight : measuredHeight;
+          return i < 2
+            ? measuredHeight + continuationNoticeHeight
+            : measuredHeight;
         }),
       );
 
@@ -243,7 +246,10 @@ export function Page(props: PageProps): ReactElement {
       <style ref={styleRef}>{getPageCss(geo.width, geo.height)}</style>
       {flow.pages.map((pg, p) => {
         const info: PageInfo = { page: p + 1, pages: total };
-        const openEntry = pg.open >= 0 ? (entries[regionEntries[pg.open] as number] as Entry) : null;
+        const openEntry =
+          pg.open >= 0
+            ? (entries[regionEntries[pg.open] as number] as Entry)
+            : null;
 
         return (
           <Sheet key={p} {...geo} info={info} footer={footer}>
@@ -256,7 +262,11 @@ export function Page(props: PageProps): ReactElement {
             {/* this page's window onto the tall column */}
             <div
               data-elses-window=""
-              style={{ height: pg.end - pg.start, overflow: "hidden", flexShrink: 0 }}
+              style={{
+                height: pg.end - pg.start,
+                overflow: "hidden",
+                flexShrink: 0,
+              }}
             >
               <div
                 style={{
