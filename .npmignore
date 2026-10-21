@@ -1,0 +1,7 @@
+# Keep src, tests, and TypeScript/build configuration in the published package.
+node_modules/
+coverage/
+.nyc_output/
+*.log
+*.tgz
+.DS_Store
