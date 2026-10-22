@@ -102,6 +102,32 @@ describe("snapCut", () => {
     ];
     expect(snapCut(500, 0, 500, side)).toBe(470);
   });
+
+  it("moves a cut above a compact row, including its padding box", () => {
+    const rowText = [{ top: 480, bottom: 500 }];
+    const paddedRow = [{ top: 468, bottom: 512 }];
+    expect(snapCut(500, 0, 500, rowText, paddedRow)).toBe(468);
+  });
+
+  it("keeps a multiline paragraph line-breakable instead of moving the whole block", () => {
+    const paragraphLines = Array.from({ length: 12 }, (_, i) => ({
+      top: 360 + i * 12,
+      bottom: 372 + i * 12,
+    }));
+    expect(snapCut(500, 0, 500, paragraphLines)).toBe(492);
+  });
+
+  it("falls back to line-level cuts for a row taller than the page", () => {
+    const textLines = [{ top: 492, bottom: 512 }];
+    const tallRow = [{ top: 0, bottom: 900 }];
+    expect(snapCut(500, 0, 500, textLines, tallRow)).toBe(492);
+  });
+
+  it("does not move a row to the next page if that would leave too little content", () => {
+    const rowText = [{ top: 492, bottom: 512 }];
+    const paddedRow = [{ top: 20, bottom: 520 }];
+    expect(snapCut(500, 0, 500, rowText, paddedRow)).toBe(492);
+  });
 });
 
 describe("page geometry", () => {

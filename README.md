@@ -90,7 +90,9 @@ export function Invoice({ items, total }: { items: Item[]; total: string }) {
 
 ## Pagination and styling
 
-The document is measured as one continuous column. Pages display successive slices of that column, so content can continue across page boundaries whether it is a direct child of `Page` or inside a `PageElement`. Cuts move between text lines where possible; a very tall element can still be split.
+The document is measured as one continuous column. Pages display successive slices of that column, so content can continue across page boundaries whether it is a direct child of `Page` or inside a `PageElement`.
+
+Smart page-break handling avoids cutting through text lines and visual elements where possible. Table rows, explicitly marked elements, and eligible compact horizontal Flexbox and Grid layouts can be kept together when space allows.
 
 Each non-final page automatically displays an italic **“(Document continued to next page)”** notice above the footer. `header` appears on the first page, `continuationHeader` on later pages, and `footer` on every page. These areas take up page space.
 
@@ -100,12 +102,18 @@ For an in-app preview, render `<Page>` directly. Call `printDocument` when the u
 
 ## Important notes
 
-- Page breaks are based on layout, not React component boundaries. A card, summary, or table row may split; there is no keep-together option yet.
+- Keep-together handling is heuristic. Elements that fit within the available page area can be kept intact, but elements that are too tall or cannot be moved without violating page-fill constraints may still split.
 - Browser print output can vary. For a clean result, ask users to disable the browser's own print headers and footers.
 - Keep the footer height consistent between pages. Give images explicit dimensions so their space is reserved while the document is measured.
 - `PageElement` must be a direct child of `Page`.
 
-## What's New — v1.2.0
+## What's New — v1.2.1
+
+- Improved page-break placement around text lines and visual elements.
+- Added keep-together handling for table rows and eligible compact horizontal Flexbox and Grid layouts.
+- Added `data-elses-keep-together` for explicitly marking elements that should stay together when possible.
+
+## Previous Release — v1.2.0
 
 - Added a built-in print toolbar with a manual **Print** button.
 - Automatically hides the toolbar when printing.

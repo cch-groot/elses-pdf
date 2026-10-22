@@ -13,7 +13,7 @@ import { PageElement } from "./PageElement";
 import { Sheet } from "./Sheet";
 import { computeFlow, type FlowResult, type Region } from "./flow";
 import { getPageCss, resolveGeometry } from "./pageSizes";
-import { collectBreakRects, snapCut } from "./snap";
+import { collectBreakRects, collectKeepTogetherRects, snapCut } from "./snap";
 import type { PageElementProps, PageInfo, PageProps } from "./types";
 import { resolveSlot, whenAssetsReady } from "./utils";
 
@@ -130,6 +130,7 @@ export function Page(props: PageProps): ReactElement {
       });
 
       const rects = collectBreakRects(column);
+      const keepTogetherRects = collectKeepTogetherRects(column);
 
       setMeasured({
         props,
@@ -141,7 +142,7 @@ export function Page(props: PageProps): ReactElement {
           firstHead: h(firstHeadRef.current),
           contHead: h(contHeadRef.current),
           regions,
-          snap: (cut, start, cap) => snapCut(cut, start, cap, rects),
+          snap: (cut, start, cap) => snapCut(cut, start, cap, rects, keepTogetherRects),
         }),
       });
     })();
